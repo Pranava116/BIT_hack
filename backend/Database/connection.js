@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI=process.env.MONGODB_URI
 
 export default function connectMongoDB() {
+
+const MONGODB_URI=process.env.MONGODB_URI
 
     return mongoose.connect(MONGODB_URI)
         .then(
@@ -12,7 +13,7 @@ export default function connectMongoDB() {
         )
         .catch(
             (error) => {
-                console.log("Error while Connecting to MONGODB server")
+                console.log(`Error connecting to MONGODB server: ${error.message}`);
             }
         )
 
