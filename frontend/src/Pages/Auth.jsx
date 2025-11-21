@@ -7,12 +7,14 @@ import {
   Alert,
 } from "react-native";
 import * as SecureStore from "expo-secure-store";
-import styles from "./Authstyles.js";   // ⬅ import external style file
+import styles from "./Authstyles";
+ 
 
-const BACKEND_URL = "http://localhost:8081"; 
 export default function Auth({ navigation }) {
-  const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState("");
+  
+const BACKEND_URL = "http://10.14.217.126:3000"; 
+  const [isLogin, setIsLogin] = useState(true);       
+  const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -22,25 +24,27 @@ export default function Auth({ navigation }) {
     if (!isLogin && password !== confirm)
       return Alert.alert("Passwords do not match");
 
-    const endpoint = isLogin ? "login" : "register";
-    const payload = isLogin ? { email, password } : { name, email, password };
+    const endpoint = isLogin ? "login" : "signup";
+    const body = isLogin ? { email, password } : { username, email, password };
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/auth/${endpoint}`, {
+      const res = await fetch(`${BACKEND_URL}/auth/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(body),
       });
 
-      const data = await response.json();
-      if (!response.ok) return Alert.alert(data.message || "Error");
+      const data = await res.json();
+      console.log(data)
+      if (!data.success) {
+        return Alert.alert(data.message || "Authentication failed");
+      }
 
-      // store token
       await SecureStore.setItemAsync("token", data.token);
 
-      navigation.replace("Home");
+      navigation.replace("Home");     
     } catch (error) {
-      Alert.alert("Server error");
+      Alert.alert("Server not reachable. Check backend URL.");
     }
   };
 
@@ -51,45 +55,43 @@ export default function Auth({ navigation }) {
       {!isLogin && (
         <TextInput
           placeholder="Name"
-          value={name}
-          style={styles.input}
+          value={username}
           onChangeText={setName}
+          style={styles.input}
         />
       )}
 
       <TextInput
         placeholder="Email"
         value={email}
+        onChangeText={setEmail}
         style={styles.input}
         keyboardType="email-address"
-        onChangeText={setEmail}
       />
 
       <TextInput
         placeholder="Password"
         value={password}
-        style={styles.input}
-        secureTextEntry
         onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
       />
 
       {!isLogin && (
         <TextInput
           placeholder="Confirm Password"
           value={confirm}
-          style={styles.input}
-          secureTextEntry
           onChangeText={setConfirm}
+          secureTextEntry
+          style={styles.input}
         />
       )}
 
       <TouchableOpacity style={styles.button} onPress={handleAuth}>
-        <Text style={styles.buttonText}>
-          {isLogin ? "Login" : "Register"}
-        </Text>
+        <Text style={styles.buttonText}>{isLogin ? "Login" : "signup"}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
+      <TouchableOpacity onPress={() => setIsLogin((prev) => !prev)}>
         <Text style={styles.switchText}>
           {isLogin
             ? "Don't have an account? Register"
