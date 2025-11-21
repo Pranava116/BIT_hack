@@ -57,6 +57,16 @@ const Home = ({ navigation }) => {
           3. You get price and retailer comparisons instantly
         </Text>
       </View>
+      <View style={styles.containerr}>
+      <Text style={styles.titlee}>Welcome Home</Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('AIsuggest')}
+      >
+        <Text style={styles.buttonText}>Go to AI Suggestion</Text>
+      </TouchableOpacity>
+    </View>
     </ScrollView>
   );
 };
@@ -163,6 +173,10 @@ const styles = StyleSheet.create({
   infoText: {
     color: "#1f2937",
     lineHeight: 22,
+     containerr: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
+  titlee: { fontSize: 22, marginBottom: 20 },
+  button: { backgroundColor: '#007AFF', padding: 15, borderRadius: 8 },
+  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
   },
 });
 

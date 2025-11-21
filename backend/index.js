@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 import ConnectMongoDB from './Database/connection.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import aiRoutes from './Routes/aiRoutes.js'
+
 dotenv.config()
 
 const app = express()
@@ -43,6 +45,8 @@ app.use('/auth', authRoutes)
 
 // Direct route for product comparison (bypassing router for now)
 app.get('/api/compare', compareProducts);
+app.use('/api',aiRoutes)
+
 
 const PORT = process.env.PORT
 
