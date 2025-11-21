@@ -2,11 +2,16 @@ import express from 'express'
 import authRoutes from './Routes/authRoutes.js'
 import dotenv from 'dotenv'
 import ConnectMongoDB from './Database/connection.js'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 dotenv.config()
 
 const app = express()
-app.use(cors())
+
+app.use(cors({credentials:true}));
+app.use(cookieParser());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 //Test
 app.get('/',
@@ -15,8 +20,6 @@ app.get('/',
     }
 )
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 //Routes for Authentication and Authorization
 app.use('/auth',authRoutes)

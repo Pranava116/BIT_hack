@@ -18,7 +18,6 @@ export default async function login(req,res,next){
             if(!isPasswordValid){
                 res.status(400).json({message:"Invalid Credentials"})
             }else{
-                res.status(200).json({message:"User Logged In Successfully"})
 
                 res.body.email=user.email
                 res.body.username=user.username
