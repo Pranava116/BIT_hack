@@ -20,33 +20,35 @@ const BACKEND_URL = "http://10.14.217.126:3000";
   const [confirm, setConfirm] = useState("");
 
   const handleAuth = async () => {
-    if (!email || !password) return Alert.alert("Please fill all fields");
-    if (!isLogin && password !== confirm)
-      return Alert.alert("Passwords do not match");
+  if (!email || !password) return Alert.alert("Please fill all fields");
+  if (!isLogin && password !== confirm)
+    return Alert.alert("Passwords do not match");
 
-    const endpoint = isLogin ? "login" : "signup";
-    const body = isLogin ? { email, password } : { username, email, password };
+  const endpoint = isLogin ? "login" : "signup";
+  const body = isLogin ? { email, password } : { username, email, password };
 
-    try {
-      const res = await fetch(`${BACKEND_URL}/auth/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+  try {
+    const res = await fetch(`${BACKEND_URL}/auth/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-      const data = await res.json();
-      console.log(data)
-      if (!data.success) {
-        return Alert.alert(data.message || "Authentication failed");
-      }
+    const data = await res.json();
 
-      await SecureStore.setItemAsync("token", data.token);
+if (!data.success) {
+  return Alert.alert(data.message || "Authentication failed");
+}
 
-      navigation.replace("Home");     
-    } catch (error) {
-      Alert.alert("Server not reachable. Check backend URL.");
-    }
-  };
+
+await SecureStore.setItemAsync("token", data.token);
+navigation.navigate("Home");
+
+  } catch (error) {
+    Alert.alert("Server not reachable. Check backend URL.");
+  }
+};
+
 
   return (
     <View style={styles.container}>
