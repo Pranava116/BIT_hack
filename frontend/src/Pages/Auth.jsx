@@ -12,7 +12,7 @@ import styles from "./Authstyles";
 
 export default function Auth({ navigation }) {
   
-const BACKEND_URL = "http://10.14.217.237:3000"; 
+const BACKEND_URL = "http:/10.14.217.51:3000"; 
   const [isLogin, setIsLogin] = useState(true);       
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
