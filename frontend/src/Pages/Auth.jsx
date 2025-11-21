@@ -41,7 +41,9 @@ if (!data.success) {
 }
 
 
-await SecureStore.setItemAsync("token", data.token);
+// Trim token to remove any whitespace before storing
+const cleanToken = data.token.trim();
+await SecureStore.setItemAsync("token", cleanToken);
 navigation.navigate("Home");
 
   } catch (error) {

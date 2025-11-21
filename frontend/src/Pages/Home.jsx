@@ -16,6 +16,7 @@ const highlights = [
 const Home = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* Hero Section */}
       <View style={styles.heroBadge}>
         <Text style={styles.heroBadgeText}>Your shopping copilot</Text>
       </View>
@@ -25,6 +26,7 @@ const Home = ({ navigation }) => {
         RapidAPI integrations.
       </Text>
 
+      {/* CTA Buttons */}
       <View style={styles.ctaGroup}>
         <TouchableOpacity
           style={styles.primaryButton}
@@ -40,6 +42,7 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Highlights Section */}
       <View style={styles.highlights}>
         {highlights.map((item) => (
           <View key={item.label} style={styles.highlightCard}>
@@ -49,6 +52,7 @@ const Home = ({ navigation }) => {
         ))}
       </View>
 
+      {/* Info Section */}
       <View style={styles.infoCard}>
         <Text style={styles.infoTitle}>How it works</Text>
         <Text style={styles.infoText}>
@@ -57,16 +61,28 @@ const Home = ({ navigation }) => {
           3. You get price and retailer comparisons instantly
         </Text>
       </View>
-      <View style={styles.containerr}>
-      <Text style={styles.titlee}>Welcome Home</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('AIsuggest')}
-      >
-        <Text style={styles.buttonText}>Go to AI Suggestion</Text>
-      </TouchableOpacity>
-    </View>
+      {/* AI Suggestion Button */}
+      <View style={styles.aiButtonContainer}>
+        <Text style={styles.aiTitle}>AI Financial Advisor</Text>
+        <TouchableOpacity
+          style={styles.aiButton}
+          onPress={() => navigation.navigate("AIsuggest")}
+        >
+          <Text style={styles.aiButtonText}>Go to AI Suggestion</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Investment Planner Button */}
+      <View style={styles.aiButtonContainer}>
+        <Text style={styles.aiTitle}>Investment Planner</Text>
+        <TouchableOpacity
+          style={styles.investmentButton}
+          onPress={() => navigation.navigate("InvestmentPlanner")}
+        >
+          <Text style={styles.aiButtonText}>Plan Your Investments</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -137,6 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
+    marginBottom: 24,
   },
   highlightCard: {
     flexBasis: "48%",
@@ -163,6 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#dbeafe",
     padding: 18,
     borderRadius: 18,
+    marginBottom: 24,
   },
   infoTitle: {
     fontSize: 18,
@@ -173,10 +191,38 @@ const styles = StyleSheet.create({
   infoText: {
     color: "#1f2937",
     lineHeight: 22,
-     containerr: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
-  titlee: { fontSize: 22, marginBottom: 20 },
-  button: { backgroundColor: '#007AFF', padding: 15, borderRadius: 8 },
-  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
+  },
+  aiButtonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  aiTitle: {
+    fontSize: 22,
+    fontWeight: "600",
+    color: "#0f172a",
+    marginBottom: 12,
+  },
+  aiButton: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    alignItems: "center",
+    width: "100%",
+  },
+  aiButtonText: {
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  investmentButton: {
+    backgroundColor: "#10b981",
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    alignItems: "center",
+    width: "100%",
   },
 });
 

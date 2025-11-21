@@ -6,6 +6,7 @@ import Auth from './src/Pages/Auth';
 import Home from './src/Pages/Home';
 import AIsuggest from './src/Pages/AIsuggest'; 
 import ProductSearch from './src/Pages/ProductSearch';
+import InvestmentPlanner from './src/Pages/InvestmentPlanner';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ProductSearch" component={ProductSearch} />
         <Stack.Screen name="AIsuggest" component={AIsuggest} />
+        <Stack.Screen name="InvestmentPlanner" component={InvestmentPlanner} />
       </Stack.Navigator>
     </NavigationContainer>
   );
