@@ -10,17 +10,17 @@ export default async function login(req,res,next){
         const user=await User.findOne({email})
         //No User Found
         if(!user){
-            res.status(400).json({message:"User with this email does not exist"})
+            return res.status(400).json({message:"User with this email does not exist"})
         }else{
 
             //Comparing Passwords
             const isPasswordValid=await bcrypt.compare(password,user.password)
             if(!isPasswordValid){
-                res.status(400).json({message:"Invalid Credentials"})
+                return res.status(400).json({message:"Invalid Credentials"})
             }else{
 
-                res.body.email=user.email
-                res.body.username=user.username
+                req.body.email=user.email
+                req.body.username=user.username
 
                 //For sending JWT
                 next()
@@ -31,6 +31,6 @@ export default async function login(req,res,next){
     } catch (error) {
         //Failsafe for unexpected errors
         console.log(`Error while logging in:${error.message}`);
-        res.status(500).json({message:"Internal Server Error"})
+        return res.status(500).json({message:"Internal Server Error"})
     }
 }

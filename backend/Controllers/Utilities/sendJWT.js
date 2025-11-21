@@ -1,9 +1,10 @@
 import JWT from 'jsonwebtoken'
 
-const JWT_SECRET=process.env.JWT_SECRET
-
 export default function sendJWT(req,res){
     try {
+
+        const JWT_SECRET = process.env.JWT_SECRET
+
         const email=req.body.email;
         const username=req.body.username;
         //Creating Payload for JWT
