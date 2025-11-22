@@ -7,7 +7,7 @@
 // For mobile development, use your computer's IP address
 // For web development, you can use 'localhost'
 const API_BASE_URL = __DEV__ 
-  ? 'http://10.14.217.126:3000'  // Change this to your computer's IP address
+  ? 'http://192.168.56.1:3000'  // Change this to your computer's IP address
   : 'https://your-production-api.com'; // Update with your production URL
 
 export default API_BASE_URL;

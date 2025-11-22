@@ -9,7 +9,7 @@ const ProductSearch = () => {
   const [results, setResults] = useState([]);
   const [recommended, setRecommended] = useState(null);
 
-  const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL || "http://10.14.217.126:3000";
+  const BACKEND_URL = process.env.EXPO_PUBLIC_API_URL || "http://192.168.56.1:3000";
   // backend must fetch data from Amazon, Flipkart, etc.
 
   const searchProduct = async () => {
